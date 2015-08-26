@@ -48,6 +48,7 @@ module ActiveModel
           resource[:relationships] ||= {}
           resource[:relationships][name] ||= { data: [] }
           resource[:relationships][name][:data] += serializers.map { |serializer| { type: serializer.json_api_type, id: serializer.id.to_s } }
+          resource[:relationships][name][:links] = { related: resource[:attributes][:related][name] } if resource[:attributes][:related]
         end
 
         def add_relationship(resource, name, serializer, val=nil)
